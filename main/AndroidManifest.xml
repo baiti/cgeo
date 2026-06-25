@@ -976,6 +976,19 @@
 
         <!-- Receiver for custom tabs share intent -->
         <receiver android:name=".settings.ShareBroadcastReceiver"/>
+
+        <!-- SPIKE: external cache-tool add-on API (write side). Exported and UNGUARDED for the
+             adb demo only — DO NOT MERGE AS-IS. A real API must enforce a custom permission, e.g.:
+               <permission android:name="cgeo.geocaching.permission.CACHE_TOOL_API"
+                           android:protectionLevel="signature|normal" />
+             and add android:permission="cgeo.geocaching.permission.CACHE_TOOL_API" to the receiver. -->
+        <receiver
+            android:name=".addon.CacheToolApiReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cgeo.geocaching.addon.WRITE_WAYPOINT" />
+            </intent-filter>
+        </receiver>
     </application>
 
     <queries>
